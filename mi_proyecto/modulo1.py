@@ -1,3 +1,5 @@
+import csv
+
 def ingresar_ventas(ventas):
     while True:
         try:
@@ -27,3 +29,17 @@ def ingresar_ventas(ventas):
         else:
             print('Opción no valida. Saliendo de ventas.')
             break
+        
+
+def guardar_ventas(ventas):
+    if not ventas:
+        print('No hay nada que guardar')
+    else:
+        try:
+            with open('ventas.csv','w',newline='') as archivo:
+                guardar = csv.DictWriter(archivo,fieldnames=['Curso','Cantidad','Precio','Fecha','Cliente'])
+                guardar.writeheader()
+                guardar.writerows(ventas)
+            print('Datos gardados exitosamente!')
+        except Exception as e:
+            print(f'Error al guarda el archivo {e}')
