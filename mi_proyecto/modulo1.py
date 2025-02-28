@@ -45,18 +45,22 @@ def guardar_ventas(ventas):
             print(f'Error al guarda el archivo {e}')
             
 def analizar_ventas():
-    df = pd.read_csv('ventas.csv')
-    print('\n------------ REDUMEN DE VENTAS ------------')
-    df['Ingreso'] = df['Cantidad'] * df['Precio']
-    print(f'TOTAL de ingresos por ventas {df["Ingreso"].sum():.2f}')
-    
-    if not df.empty:
-        curso_mas_vendido = df.groupby('Curso')['Cantidad'].sum().idxmax()
-        print(f'Curso mas vendido {curso_mas_vendido}')
-        cliente_top = df.groupby('Cliente')['Ingreso'].sum().idxmax()
-        print(f'El cliento TOP es : {cliente_top}')
-    else:
-        print('NO existen datos para analizar!')
+    try:
+        df = pd.read_csv('ventas.csv')
+        print('\n------------ REDUMEN DE VENTAS ------------')
+        df['Ingreso'] = df['Cantidad'] * df['Precio']
+        print(f'TOTAL de ingresos por ventas {df["Ingreso"].sum():.2f}')
         
-    print('\n Ventas por Fecha')
-    print(df.groupby('Fecha')['Ingreso'].sum().round(decimals=2))
+        if not df.empty:
+            curso_mas_vendido = df.groupby('Curso')['Cantidad'].sum().idxmax()
+            print(f'Curso mas vendido {curso_mas_vendido}')
+            cliente_top = df.groupby('Cliente')['Ingreso'].sum().idxmax()
+            print(f'El cliento TOP es : {cliente_top}')
+        else:
+            print('NO existen datos para analizar!')
+            
+        print('\n Ventas por Fecha')
+        print(df.groupby('Fecha')['Ingreso'].sum().round(decimals=2))
+    except FileNotFoundError:
+        print('No se encontró el archivo .csv. Guarde datos antes de analizar!')
+    
