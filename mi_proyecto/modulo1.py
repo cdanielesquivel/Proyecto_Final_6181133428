@@ -1,4 +1,4 @@
-import csv
+
 
 def ingresar_ventas(ventas):
     while True:
