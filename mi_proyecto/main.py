@@ -1,5 +1,5 @@
 import os
-from modulo1 import ingresar_ventas, guardar_ventas
+from modulo1 import ingresar_ventas, guardar_ventas, analizar_ventas
 
 
 def limpiar_terminal():
@@ -36,7 +36,7 @@ def menu():
         elif opcion == "3":
             limpiar_terminal()
             print("\n--- Análisis de Ventas ---")
-            #analizar_ventas
+            analizar_ventas()
             pausar()
         elif opcion == "4":
             print("\nGracias por usar el sistema. Hasta pronto!")
