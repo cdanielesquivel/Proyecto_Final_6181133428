@@ -25,13 +25,13 @@ def menu():
             limpiar_terminal()
             print("\n--- Ingreso de Ventas ---")
             ingresar_ventas(ventas)
-            print(ventas)
+            #print(ventas)3
             pausar()
         elif opcion == "2":
             limpiar_terminal()
             print("\n--- Guardar Ventas ---")
             guardar_ventas(ventas)
-            #ventas = []
+            ventas = []
             pausar()
         elif opcion == "3":
             limpiar_terminal()

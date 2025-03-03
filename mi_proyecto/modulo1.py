@@ -1,4 +1,4 @@
-import csv,pandas as pd
+import csv,pandas as pd, os
 
 def ingresar_ventas(ventas):
     while True:
@@ -36,10 +36,15 @@ def guardar_ventas(ventas):
         print('No hay nada que guardar')
     else:
         try:
-            with open('ventas.csv','w',newline='') as archivo:
-                guardar = csv.DictWriter(archivo,fieldnames=['Curso','Cantidad','Precio','Fecha','Cliente'])
-                guardar.writeheader()
-                guardar.writerows(ventas)
+            if os.path.exists('ventas.csv'):
+                with open('ventas.csv','a',newline='') as archivo:
+                    guardar = csv.DictWriter(archivo,fieldnames=['Curso','Cantidad','Precio','Fecha','Cliente'])
+                    guardar.writerows(ventas)
+            else:
+                with open('ventas.csv','w',newline='') as archivo:
+                    guardar = csv.DictWriter(archivo,fieldnames=['Curso','Cantidad','Precio','Fecha','Cliente'])
+                    guardar.writeheader()
+                    guardar.writerows(ventas)
             print('Datos gardados exitosamente!')
         except Exception as e:
             print(f'Error al guarda el archivo {e}')
